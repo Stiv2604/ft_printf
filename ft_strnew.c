@@ -18,8 +18,6 @@ char	*ft_strnew(size_t size, t_print *print)
 	char	*new;
 
 	i = 0;
-	//(void)size;
-	//new = NULL;
 	if ((print->specifier == 's' || print->specifier == 'd' 
 		|| print->specifier == 'i') && print->space)
 		size++;
@@ -34,7 +32,6 @@ char	*ft_strnew(size_t size, t_print *print)
 			i++;
 		}
 		new[i] = '\0';
-		// new = ft_bzero(new, size);
 		return (new);
 	}
 	return (NULL);

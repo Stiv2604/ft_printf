@@ -31,6 +31,8 @@ static char     *putch(long int n, long int len, long int z, t_print *print)
 		len++;
 	i = len; 
 	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (print->is_precision == 1 && print->precision == 0 && n == 0)
+		print->dot_zero = 1;
 	if (str == 0)
 		return (NULL);
 	i--;
@@ -62,6 +64,7 @@ char     *print_i_d(int new, t_print *print)
 	long int			l;
 	char				*str;
 
+	str = NULL;
 	newn = (long int)new;
     z = check(newn);
 	l = len(newn);

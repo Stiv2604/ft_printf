@@ -33,12 +33,29 @@ static char    *putch_u(long int n, long int l)
 	return (str);
 }
 
-char     *ft_print_ud(unsigned int new)
+char     *ft_print_ud(unsigned int new, t_print *print)
 {
     int                 l;
 	char				*str;
 
     l = len(new);
+	if (new == 0 && print->precision == 0 && print->is_precision == 1 && print->is_zero == 0)
+	{
+		str = NULL;
+		print->is_len += 0;
+		return (str);
+	}
+	if (new == 0 && print->precision == 0 && print->is_precision == 1 && print->is_zero > 0)
+	{
+		print->is_len += print->is_zero;
+		str = NULL;
+		while (print->is_zero > 0)
+		{
+			write(1, " ", 1);
+			print->is_zero--;
+		}
+		return (str);
+	}
 	str = putch_u(new, l);
 	return (str);
 }

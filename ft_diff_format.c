@@ -24,23 +24,103 @@ void    format_hash(t_print *print)
 
 void    format_null_str(t_print *print)
 {
-    write(1, "(null)", 6);
-    print->is_len += 6;
+    if (print->is_widht <= 6 && print->precision == 0)
+    {
+        write(1, "(null)", 6);
+        print->is_len += 6;
+        return ;
+    }
+    else if (print->precision >= 6 && print->is_widht == 0)
+    {
+        write(1, "(null)", 6);
+        print->is_len += 6;
+        return ;
+    }
+    else if (print->is_widht == 0 && print->precision <= 6)
+    {
+        print->is_len += 0;
+        return ;
+    }
+    else if (print->is_widht > 6)
+    {
+        print->is_widht = print->is_widht - 6;
+        print->is_len = print->is_widht;
+        while (print->is_widht > 0)
+        {
+            write(1, " ", 1);
+            print->is_widht--;
+        }
+        write(1, "(null)", 6);
+        print->is_len += 6;
+    }
     return ;
 }
 
 void    format_null(t_print *print)    
 {
-    write(1, "\0", 1);
+    char    c;
+
+    c = '\0';
+    write(1, &c, 1);
 	print->is_len++;
     return ;
 }
 
 void    format_minus_null(t_print *print)
 {
-    //printf("%d", print->is_len);
     write(1, "\0", 1);
     print->is_len = print->is_len + print->is_minus;
+    return ;
+}
+
+void    format_null_pointer(t_print *print)
+{
+    if (print->is_widht <= 5)
+    {
+        write(1, "(nil)", 5);
+        print->is_len += 5;
+        return ;
+    }
+    if (print->is_widht > 5)
+    {
+        print->is_widht = print->is_widht - 5;
+        print->is_len += print->is_widht;
+        while (print->is_widht > 0)
+        {
+            write(1, " ", 1);
+            print->is_widht--;
+        }
+        write(1, "(nil)", 5);
+        print->is_len += 5;
+    }
+    return ;
+}
+
+void    format_id_precision(t_print *print)
+{
+    if (ft_strlen(print->specifier_value) == 1)
+    {
+        if (print->dot_zero == 1 && print->is_minus != 0)
+        {
+            print->is_len += print->is_minus;
+            while(print->is_minus > 0 || print->is_zero > 0)
+            {
+                write(1, " ", 1);
+                print->is_minus--;
+            }
+        }
+        if (print->dot_zero == 1 && print->is_minus == 0 && print->is_zero != 0)
+        {
+            print->is_len += print->is_zero;
+            while(print->is_zero > 0)
+            {
+                write(1, " ", 1);
+                print->is_zero--;
+            }
+        }
+        if (print->dot_zero == 1 && print->is_minus == 0)
+            print->is_len += 0;
+    }
     return ;
 }
 
@@ -54,6 +134,10 @@ int     diff_format(t_print *print)
         format_null_str(print);
     else if (print->specifier == '%' && print->hash)
         format_hash(print);
+    else if (print->specifier == 'p' && print->null)
+        format_null_pointer(print);
+    else if ((print->specifier == 'i' || print->specifier == 'd') && print->dot_zero == 1 && print->precision == 0)
+        format_id_precision(print);
     else
         input(print);
     return (0);

@@ -18,25 +18,30 @@ int     ft_parcer_flags(char *format, t_print *print)
 
     i = 0;
     if (format[i] == '-')
-    {
         i += ft_parcer_minus(format, print);
-    }
     else if (format[i] == '0')
     {
         if ((format[i] >= 48 && format[i] <= 57))
-            i += parse_widht(format, print);
+            i += ft_parcer_null(format, print);
     }
     else if (format[i] == '+')
     {
         i++;
+        while (format[i] == '+')
+            i++;
         print->sign = 1;
     }
     else if (format[i] == ' ')
     {
         i++;
+        while (format[i] == ' ')
+            i++;
         print->space = 1;
     }
-    // else if (format[i] == '+')
-    // {}
+    else if (format[i] == '#')
+    {
+        i++;
+        print->hash = 1;
+    }
     return (i);
 }

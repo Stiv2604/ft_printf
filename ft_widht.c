@@ -18,7 +18,6 @@ int     ft_widht(char *format, t_print *print)
 
     i = 0;
     if ((format[i] >= 48 && format[i] <= 57))
-        i += parse_widht(format, print);
-    //printf("_%d_", print->is_widht);
+        i += ft_parcer_widht(format, print);
     return (i);
 }

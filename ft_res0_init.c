@@ -27,6 +27,7 @@ void    ft_init_print(t_print *print)
     print->specifier_value = NULL;
     print->specifier = 0;
     print->value_len = 0;
+    print->dot_zero = 0;
     return ;
 }
 
@@ -45,5 +46,6 @@ void    rem_init(t_print *print)
     print->specifier_value = NULL;
     print->specifier = 0;
     print->value_len = 0;
+    print->dot_zero = 0;
     return ;
 }

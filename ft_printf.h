@@ -22,6 +22,7 @@ typedef struct			s_print
 	char                specifier;
     char                *specifier_value;
     int                 is_len;
+    int                 dot_zero;
 }                       t_print;
 
 int     ft_printf(const char *format, ...);
@@ -42,7 +43,7 @@ char    *print_i_d(int new, t_print *print);
 char    *print_char(char c, t_print *print);
 char    *print_string(char *str, t_print *print);
 int     ft_precision(char *format, t_print *print);
-int     parse_widht(char *format, t_print *print);
+int     ft_parcer_null(char *format, t_print *print);
 int     parser_precision(char *format, int *print);
 void	*ft_memset(void *s, int c, int len);
 int     len(long int n);
@@ -56,10 +57,10 @@ void     ft_atoi(char *str, int *t);
 void    format_widht_ch_str(t_print *print);
 int     ft_parse_specifier(va_list arg, char *symbol, t_print *print);
 void	ft_putstr_len(char *str, size_t len);
-char    *ft_print_ud(unsigned int new);
+char     *ft_print_ud(unsigned int new, t_print *print);
 void    ft_specifier_u(t_print *print, va_list arg);
-char    *ft_print_upper_x(unsigned int new);
-char    *ft_print_lower_x(unsigned int new);
+char    *ft_print_upper_x(unsigned int new, t_print *print);
+char    *ft_print_lower_x(unsigned int new, t_print *print);
 void    ft_specifier_lower_x(t_print *print, va_list arg);
 void    ft_specifier_upper_x(t_print *print, va_list arg);
 void    format_zero(t_print *print);
@@ -74,7 +75,13 @@ void    secret_case(t_print *print, char*str);
 void    format_null_str(t_print *print);
 int     ft_parcer_minus(char *format, t_print *print);
 void    format_minus(t_print *print);
-
+int     ft_parcer_widht(char *format, t_print *print);
+char    *ft_format_p_u(t_print *print, int *p);
+char    *ft_format_p_s(t_print *print, int *p);
+char    *ft_format_p_upperx_lowerx(t_print *print, int *p);
+char    *ft_format_p_id(t_print *print, int *p);
+void    format_widht_num(t_print *print);
+void    ft_search(unsigned int new, t_print *print, int *r);
 
 
 // void* my_malloc(size_t size, const char *file, int line, const char *func);

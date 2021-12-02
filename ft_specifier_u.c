@@ -15,6 +15,10 @@
 void    ft_specifier_u(t_print *print, va_list arg)
 {
     if (print->specifier == 'u')
-        print->specifier_value = ft_print_ud(va_arg(arg, unsigned int));
-    print->value_len = print->specifier_value == NULL ? 0 : ft_strlen(print->specifier_value);
+        print->specifier_value = ft_print_ud(va_arg(arg, unsigned int), print);
+    //print->value_len = print->specifier_value == NULL ? 0 : ft_strlen(print->specifier_value);
+    if (print->specifier_value == NULL)
+        print->value_len = 0;
+    else
+        print->value_len = ft_strlen(print->specifier_value);
 }

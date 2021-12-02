@@ -14,14 +14,36 @@
 
 void    format_zero(t_print *print)
 {
-    //printf("len %d_%d_", print->value_len, print->is_zero);
-	//write(1, &print->is_zero, 1);
-    if (print->is_zero > print->value_len)
+    int tmp;
+
+    tmp = 0;
+    // if  (print->is_zero > print->value_len)
+    // {
+    //     print->specifier_value = ft_format(print, '0', &print->is_zero);
+    //     print->value_len = print->is_zero;
+    // }
+    // if (print->is_zero > print->value_len && print->is_zero < print->precision)
+    // {
+    //     print->specifier_value = ft_format(print, '0', &print->is_zero);
+    //     print->value_len = print->is_zero;
+    // }
+    if  (print->is_zero > print->value_len)
     {
-		//write(1, "1", 1);
-        print->specifier_value = ft_format(print, '0', &print->is_zero);
-        //printf("_%s_", print->specifier_value);
-        print->value_len = print->is_zero;
+        if (print->is_zero > print->value_len && print->is_zero < print->precision)
+        {
+            print->specifier_value = ft_format(print, '0', &print->is_zero);
+            print->value_len = print->is_zero;
+        }
+        else if (print->is_zero > print->value_len && print->is_zero > print->precision && print->precision != 0)
+        {
+            print->specifier_value = ft_format(print, ' ', &print->is_zero);
+            print->value_len = tmp + print->is_zero;
+        }
+        else
+        {
+            print->specifier_value = ft_format(print, '0', &print->is_zero);
+            print->value_len = print->is_zero;
+        }
     }
     return ;
 }

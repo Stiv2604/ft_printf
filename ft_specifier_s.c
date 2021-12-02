@@ -41,6 +41,10 @@ void    ft_specifier_s(t_print *print, va_list arg)
     str = va_arg(arg, char *);
     if (print->specifier == 's' && str != NULL)
         print->specifier_value = print_string(str, print); 
-    print->value_len = print->specifier_value == NULL ? 0 : ft_strlen(print->specifier_value);
+    //print->value_len = print->specifier_value == NULL ? 0 : ft_strlen(print->specifier_value);
+    if (print->specifier_value == NULL)
+        print->value_len = 0;
+    else
+        print->value_len = ft_strlen(print->specifier_value);
     secret_case_s(print, print->specifier_value);
 }

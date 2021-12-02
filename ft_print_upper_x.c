@@ -26,13 +26,15 @@ static int     lenght(unsigned int n)
 	return (len);
 }
 
-static int ft_convert_hex(unsigned int nb, char *str)
+static int ft_convert_hex(unsigned int nb, char *str, t_print *print)
 {
-	char	*r;
-	int		i;
+	char				*r;
+	int					i;
+	unsigned int		rnb;
 
 	i = 0;
     r = str;
+	rnb = nb;
 	if (nb == 0)
 		r[i++] = '0';
 	while (nb > 0)
@@ -40,11 +42,15 @@ static int ft_convert_hex(unsigned int nb, char *str)
 			r[i++] = "0123456789ABCDEF"[nb % 16];
 			nb /= 16;
 	}
-    //printf("%s", r);
+	if (rnb != 0 && print->hash == 1)
+	{
+		r[i++] = 'X';
+		r[i++] = '0';
+	}
     return (i);
 }
 
-char    *ft_print_upper_x(unsigned int new)
+char    *ft_print_upper_x(unsigned int new, t_print *print)
 {
     char    *str;
     int     i;
@@ -54,12 +60,12 @@ char    *ft_print_upper_x(unsigned int new)
 
     k = 0;
     r = lenght(new);
-    //printf("%d", r);
+	ft_search(new, print, &r);
+	if (new == 0 && print->is_precision == 1 && print->precision == 0)
+		return (NULL);
     str = (char *)malloc(sizeof(char) * (r + 1));
-    i = ft_convert_hex(new, str);
+    i = ft_convert_hex(new, str, print);
     r = i;
-    //printf("xec %d", i);
-    //printf("str %s_", str);
     while (k < i - 1)
 	{
 		tmp = str[i - 1];
@@ -69,6 +75,5 @@ char    *ft_print_upper_x(unsigned int new)
         k++;
 	}
     str[r] = '\0';
-    //printf("upper _%s_\n", str);
     return (str);
 }

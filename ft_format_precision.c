@@ -14,7 +14,13 @@
 
 void    format_precision(t_print *print)
 {
-    //write(1, "1", 1);
-    print->specifier_value = ft_format_p(print, &print->precision);
-    //printf("%s",print->specifier_value);
+    //print->specifier_value = ft_format_p(print, &print->precision);
+    if (print->specifier == 'i' || print->specifier == 'd')
+        print->specifier_value = ft_format_p_id(print, &print->precision);
+    if (print->specifier == 'x' || print->specifier == 'X')
+        print->specifier_value = ft_format_p_upperx_lowerx(print, &print->precision);
+    if (print->specifier == 's')
+       print->specifier_value = ft_format_p_s(print, &print->precision);
+    if (print->specifier == 'u')
+        print->specifier_value = ft_format_p_u(print, &print->precision);
 }

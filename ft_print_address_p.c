@@ -27,8 +27,8 @@ static int     lenght(unsigned long int n)
 
 static int	ft_convert_hex(unsigned long int nb, char *str)
 {
-	char	*r;
-	int		i;
+	char	        *r;
+	int		        i;
 
 	i = 0;
     r = str;
@@ -71,17 +71,8 @@ char     *ft_print_address(unsigned long int new)
 {
     char    *str;
 
-    // if (new == 0 && !(print->precision))
-    // {
-    //     str = (char *)malloc(sizeof(char) * (3));
-    //     str = "0x";
-    // }
-    // else if (new == 0 && (print->precision))
-    // {
-    //     str = (char *)malloc(sizeof(char) * (5));
-    //     str = "(nil)";
-    // }
-    // else
+    if (new == 0)
+        return (NULL);
     str = ft_address(new);
     return (str);
 }

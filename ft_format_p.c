@@ -12,60 +12,104 @@
 
 #include "ft_printf.h"
 
-char    *ft_format_p(t_print *print, int *p)
+char    *ft_format_p_id(t_print *print, int *p)
+{
+    char    *str;
+    char    *new;
+
+    str = NULL;
+    if (print->value_len <= (*p))
+    {
+        if (*print->specifier_value == '-')
+        {
+            str = ft_strnew((*p) - print->value_len + 1, print);
+            str = ft_memset(str, '0', (*p) - print->value_len + 1);
+            print->value_len = (*p) + 1;
+        }
+        else
+        {
+            str = ft_strnew((*p) - print->value_len, print);
+            str = ft_memset(str, '0', (*p) - print->value_len);
+            print->value_len = (*p);
+        }
+    }
+    else
+        return (print->specifier_value);
+    new = ft_subjoin(print->specifier_value, str, 0);
+    free(print->specifier_value);
+    free(str);
+    return (new);
+}
+
+char    *ft_format_p_upperx_lowerx(t_print *print, int *p)
+{
+    char    *str;
+    char    *new;
+    
+    new = NULL;
+    str = NULL;
+    if (print->specifier == 'x' || print->specifier == 'X')
+    {
+        if (print->value_len < (*p))
+        {
+            str = ft_strnew((*p) - print->value_len, print);
+            str = ft_memset(str, '0', (*p) - (print->value_len));
+            print->value_len = (*p);
+        }
+        else if (print->value_len >= (*p))
+            return (print->specifier_value);
+    }
+    if (!print->value_len)
+        return (str);
+    new = ft_subjoin(print->specifier_value, str, 0);
+    free(print->specifier_value);
+    free(str);
+    return (new);
+}
+
+char    *ft_format_p_s(t_print *print, int *p)
 {
     char    *str;
     char    *new;
 
     new = NULL;
     str = NULL;
-    //write(1, "1", 1);
-    if (print->specifier == 'i' || print->specifier == 'd' || print->specifier == 'u')
+    if (print->value_len < (*p))
     {
-        //write(1, "1", 1);
-        if (print->value_len < *p)
+        if (print->value_len == 0)
+            return (print->specifier_value);
+        return (print->specifier_value);
+    }
+    else if (print->value_len >= (*p))
+    {
+        print->value_len = (*p);
+        return (print->specifier_value);
+    }
+    if (!print->value_len)
+        return (str);
+    new = ft_subjoin(print->specifier_value, str, 0);
+    free(print->specifier_value);
+    free(str);
+    return (new);
+}
+
+char    *ft_format_p_u(t_print *print, int *p)
+{
+    char    *str;
+    char    *new;
+
+    new = NULL;
+    str = NULL;
+    if (print->specifier == 'u')
+    {
+         if (print->value_len < (*p))
         {
-            str = ft_strnew(*p - print->value_len, print);
-            str = ft_memset(str, '0', *p - (print->value_len));
-            print->value_len = *p;
+            str = ft_strnew((*p) - print->value_len, print);
+            str = ft_memset(str, '0', (*p) - (print->value_len));
+            print->value_len = (*p);
         }    
-        else if (print->value_len >= *p)
-        {
-            //write(1, "1", 1);
+        else if (print->value_len >= (*p))
             return (print->specifier_value);
-        }
-    }
-    if (print->specifier == 's')
-    {
-        if (print->value_len < *p)
-        {
-            str = ft_strnew(*p - print->value_len, print);
-            str = ft_memset(str, ' ', *p - (print->value_len));
-            print->value_len = *p;
-        }
-        else if (print->value_len >= *p)
-        {
-            //write(1, "1", 1);
-            print->value_len = *p;
-            //printf("dssfsdf%s",print->specifier_value);
-            return (print->specifier_value);
-        }
-    }
-    if (print->specifier == 'x' || print->specifier == 'X')
-    {
-        if (print->value_len < *p)
-        {
-            str = ft_strnew(*p - print->value_len, print);
-            str = ft_memset(str, '0', *p - (print->value_len));
-            print->value_len = *p;
-        }
-        else if (print->value_len >= *p)
-        {
-            //write(1, "1", 1);
-            print->value_len = *p;
-            //printf("dssfsdf%s",print->specifier_value);
-            return (print->specifier_value);
-        }
     }
     if (!print->value_len)
         return (str);

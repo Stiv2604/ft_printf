@@ -15,19 +15,14 @@
 int     parser_precision(char *format, int *print)
 {
     int     r;
-    char    *precision;
 
     r = 0;
-	(void)print;
-	precision = NULL;
-    while ((format[r] >= '1' && format[r] <= '9'))
+    //printf("%s", format);
+    while ((format[r] >= '0' && format[r] <= '9'))
         r++;
-    //printf("f and r |%s| %d\n", format, r);
-    //precision = ft_substr(format, 0, r, precision);
-    //printf("pre %s", precision);
-    //*print = ft_atoi(precision);
-    free(precision);
-    precision = NULL;
-    //printf("prescision %d|", *print);
+    // if (r == 0)
+    //     print->u_dot = 1;
+    *print = ft_substr(format, 0, r);
+    //printf("%d", *print);
     return (r);
 }

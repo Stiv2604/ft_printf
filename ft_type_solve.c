@@ -18,10 +18,8 @@ int     type_solve(va_list arg, char *format, t_print *print)
 
     i = 0;
     i += ft_parcer_flags((format + i), print);
-	//printf("%d", print->is_zero);
-    //i += ft_widht((format + i), print);
+    i += ft_widht((format + i), print);
     i += ft_precision((format + i), print);
     i += ft_parse_specifier(arg, (format + i), print);
-	//printf("%d", print->is_zero);
     return (i);
 }

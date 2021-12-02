@@ -17,7 +17,6 @@ int     ft_precision(char *format, t_print *print)
     int i;
 
     i = 0;
-    //printf("%s", format);
     if (format[i] == '.')
     {
         ++i;
@@ -25,6 +24,9 @@ int     ft_precision(char *format, t_print *print)
         i += parser_precision((format + i), &print->precision);
     }
     else
+    {
+        print->is_precision = 0;
         print->precision = 0;
+    }
     return (i);
 }
