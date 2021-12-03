@@ -17,12 +17,8 @@ int     parser_precision(char *format, int *print)
     int     r;
 
     r = 0;
-    //printf("%s", format);
     while ((format[r] >= '0' && format[r] <= '9'))
         r++;
-    // if (r == 0)
-    //     print->u_dot = 1;
     *print = ft_substr(format, 0, r);
-    //printf("%d", *print);
     return (r);
 }

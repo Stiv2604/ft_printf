@@ -88,6 +88,5 @@ void    ft_search(unsigned int new, t_print *print, int *r);
 // void my_free(void *p, const char *file, int line, const char *func);
 // #define malloc(X) my_malloc( X, __FILE__, __LINE__, __FUNCTION__)
 // #define free(X) my_free(X, __FILE__, __LINE__, __FUNCTION__)
-//https://www.zspapapa.com/khodizoda/42_ft_printf/blob/master/pf_parse_input.c
 
 #endif

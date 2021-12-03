@@ -32,6 +32,10 @@ void    secret_case(t_print *print, char*str)
         else
             print->null = 0;
     }
+    if (print->null)
+    {
+        free(str);
+    }
 	return ;
 }
 
@@ -39,12 +43,12 @@ void    ft_specifier_c(t_print *print, va_list arg)
 {
     char    c;
 
-    c = va_arg(arg, int);
-    if (print->specifier == 'c' && c > 0)
+    c = (unsigned char)va_arg(arg, int);
+    if (print->specifier == 'c')
             print->specifier_value = print_char(c, print);
     if (print->specifier_value == NULL)
         print->value_len = 0;
     else
         print->value_len = ft_strlen(print->specifier_value);
-    secret_case(print, print->specifier_value);
+    // secret_case(print, print->specifier_value);
 }

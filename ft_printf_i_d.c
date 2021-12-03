@@ -44,16 +44,6 @@ static char     *putch(long int n, long int len, long int z, t_print *print)
 		i--;
 		len--;
 	}
-    if (z < 0)
-        str[0] = '-';
-	else if (z > 0 && print->sign)
-	{
-		str[0] = '+';
-	}
-	else if (print->space && z > 0 && !print->sign)
-	{
-		str[0] = ' ';
-	}
 	return (str);
 }
 
@@ -69,6 +59,15 @@ char     *print_i_d(int new, t_print *print)
     z = check(newn);
 	l = len(newn);
 	str = putch(newn, l, z, print);
-	//printf("_%d_", ft_strlen(str));
+	if (z < 0)
+        str[0] = '-';
+	else if (z > 0 && print->sign)
+	{
+		str[0] = '+';
+	}
+	else if (print->space && z > 0 && !print->sign)
+	{
+		str[0] = ' ';
+	}
 	return (str);
 }

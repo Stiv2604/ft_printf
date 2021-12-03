@@ -12,20 +12,9 @@
 
 #include "ft_printf.h"
 
-static void ft_next_next_input(t_print *print)
+static void ft_next3_input(t_print *print)
 {
-    if (print->specifier == 'x')
-    {
-        if (print->is_precision)
-            format_precision(print);
-        if (print->is_minus)
-            format_minus(print);
-        else if(print->is_zero)
-            format_zero(print);
-        if (print->is_widht)
-            format_widht_ch_str(print);
-    }
-    else if (print->specifier == 'X')
+    if (print->specifier == 'X')
     {
         if (print->is_precision)
             format_precision(print);
@@ -43,6 +32,23 @@ static void ft_next_next_input(t_print *print)
         if (print->is_widht)
             format_widht_ch_str(print);
     }
+}
+
+static void ft_next_next_input(t_print *print)
+{
+    if (print->specifier == 'x')
+    {
+        if (print->is_precision)
+            format_precision(print);
+        if (print->is_minus)
+            format_minus(print);
+        else if(print->is_zero)
+            format_zero(print);
+        if (print->is_widht)
+            format_widht_ch_str(print);
+    }
+    else
+        ft_next3_input(print);
 }
 
 static void ft_next_input(t_print *print)

@@ -16,7 +16,6 @@ void ft_specifier_lower_x(t_print *print, va_list arg)
 {
     if (print->specifier == 'x')
         print->specifier_value = ft_print_lower_x(va_arg(arg, unsigned int), print);
-    //print->value_len = print->specifier_value == NULL ? 0 : ft_strlen(print->specifier_value);
     if (print->specifier_value == NULL)
         print->value_len = 0;
     else

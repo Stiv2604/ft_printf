@@ -12,6 +12,22 @@
 
 #include "ft_printf.h"
 
+static void  ft_next(char *format, t_print *print, int *i)
+{
+    if (format[*i] == ' ')
+    {
+        (*i)++;
+        while (format[*i] == ' ')
+            (*i)++;
+        print->space = 1;
+    }
+    else if (format[*i] == '#')
+    {
+        (*i)++;
+        print->hash = 1;
+    }
+}
+
 int     ft_parcer_flags(char *format, t_print *print)
 {
     int     i;
@@ -31,17 +47,19 @@ int     ft_parcer_flags(char *format, t_print *print)
             i++;
         print->sign = 1;
     }
-    else if (format[i] == ' ')
-    {
-        i++;
-        while (format[i] == ' ')
-            i++;
-        print->space = 1;
-    }
-    else if (format[i] == '#')
-    {
-        i++;
-        print->hash = 1;
-    }
+    else
+        ft_next(format, print, &i);
+    // else if (format[i] == ' ')
+    // {
+    //     i++;
+    //     while (format[i] == ' ')
+    //         i++;
+    //     print->space = 1;
+    // }
+    // else if (format[i] == '#')
+    // {
+    //     i++;
+    //     print->hash = 1;
+    // }
     return (i);
 }

@@ -79,6 +79,5 @@ int     ft_parse_specifier(va_list arg, char *symbol, t_print *print)
     }
     else
         i = ft_parser_specifier_next_arg(arg, symbol, print, &i);
-    //secret_case(print);
     return (i);
 }

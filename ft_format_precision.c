@@ -14,7 +14,6 @@
 
 void    format_precision(t_print *print)
 {
-    //print->specifier_value = ft_format_p(print, &print->precision);
     if (print->specifier == 'i' || print->specifier == 'd')
         print->specifier_value = ft_format_p_id(print, &print->precision);
     if (print->specifier == 'x' || print->specifier == 'X')

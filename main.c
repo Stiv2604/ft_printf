@@ -23,9 +23,9 @@ int main(void)
 
     p1 = p2 = 0;
     a = 'A';
-    p1 = printf("%.3s", "abcd");
+    p1 = printf("%8%");
     printf("\n");
-    p2 = ft_printf("%.3s", "abcd");
+    p2 = ft_printf("%8%");
     if (p1 == p2)
     {
         ft_printf("\n");
@@ -66,7 +66,7 @@ int main(void)
 
 // int main()
 // {
-// 	ft_printf(" %.3s ", "abcd");
+// 	printf("%c - %s - %p %d - %i - %u - %x %X %%", '\0', "", (void *)-1, 20, -20, -1, -1, 200000000);
 // 	getchar();
 // 	return (0);
 // }
